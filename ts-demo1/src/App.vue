@@ -8,22 +8,31 @@
 
   <hr />
   <button @click="getData()">axios请求数据</button>
+  <hr>
+
+  <button @click="showModal">展示模态框</button>
+
+  <d-modal-vue v-model:visible="visible"></d-modal-vue>
 </template>
 
 <script>
 import HelloWorld from './components/HelloWorld.vue'
 import MyInputVue from './components/MyInput.vue'
+
 import Axios from 'axios'
+import DModalVue from './components/D-Modal.vue'
 export default {
   name: 'App',
   components: {
     HelloWorld,
-    MyInputVue
+    MyInputVue,
+    DModalVue
   },
   data() {
     return {
       value: '自定义组件的双向绑定',
-      list: []
+      list: [],
+      visible: false
     }
   },
   methods: {
@@ -37,6 +46,9 @@ export default {
       }).catch(error => {
         console.error(error);
       })
+    },
+    showModal() {
+      this.visible = true
     }
   },
 }
