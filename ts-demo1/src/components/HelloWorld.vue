@@ -3,6 +3,12 @@
     <button @click="helloWord">
       触发父组件的方法
     </button>
+
+    -----------------
+    <div>
+      我是helloword组件的msg -----{{name}}
+      <button @click="changeName">改变东西</button>
+    </div>
   </div>
 </template>
 
@@ -23,6 +29,9 @@ export default {
   methods: {
     helloWord() {
       this.$emit('helloWord', 'helloWord')
+    },
+    changeName() {
+      this.name = 'name改变了'
     }
   },
 }

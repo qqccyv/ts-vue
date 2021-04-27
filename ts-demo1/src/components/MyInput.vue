@@ -4,6 +4,14 @@
     <input :value="value"
            @input="$emit('update:value',$event.target.value)"
            type="text">
+
+    <div>-----</div>
+    <div>
+      <!-- 全局混入的属性或者方法的作用域都属于当前页面实例，各个页面互不干扰 -->
+      我是input组件的name
+      {{name}}
+      <button @click="showName">展示name</button>
+    </div>
   </div>
 </template>
 
@@ -14,7 +22,10 @@ export default {
       type: String,
       default: ''
     }
-  }
+  },
+  methods: {
+
+  },
 }
 </script>
 
