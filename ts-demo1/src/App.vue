@@ -13,6 +13,17 @@
   <button @click="showModal">展示模态框</button>
 
   <d-modal-vue v-model:visible="visible"></d-modal-vue>
+
+  <hr>
+  <h1>{{title}}</h1>
+  {{userInfo.name}}
+  <button @click="getTitle">获取两个值</button>
+  <button @click="setTitle">改变两个值</button>
+
+  <br>
+  <!-- 双向绑定setup中定义的响应式值 -->
+  <input type="text"
+         v-model="title">
 </template>
 
 <script>
@@ -21,12 +32,39 @@ import MyInputVue from './components/MyInput.vue'
 
 import Axios from 'axios'
 import DModalVue from './components/D-Modal.vue'
+import { ref, reactive } from 'vue';
 export default {
   name: 'App',
   components: {
     HelloWorld,
     MyInputVue,
     DModalVue
+  },
+  setup() {
+    // 设置响应式的简单数据类型的值
+    var title = ref('我是一个标题');
+    // 设置响应式的对象的值
+    const userInfo = reactive({
+      name: '邓宇',
+      age: 31
+    });
+    // 获取和修改值
+    function getTitle() {
+      console.log(title.value);
+      console.log(userInfo.name);
+    }
+    var setTitle = () => {
+      title.value = '改变后的值';
+      userInfo.name = '改变后的值'
+    }
+
+    // 将定义的值返回
+    return {
+      title,
+      userInfo,
+      getTitle,
+      setTitle
+    }
   },
   data() {
     return {
