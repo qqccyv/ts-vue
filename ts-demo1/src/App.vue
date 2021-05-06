@@ -24,6 +24,20 @@
   <!-- 双向绑定setup中定义的响应式值 -->
   <input type="text"
          v-model="title">
+
+  <hr>
+
+  {{name}}
+  <input type="text"
+         v-model="name">
+
+  <hr>
+
+  <input type="number"
+         v-model="sells">
+
+  <br>
+  销量::{{sellsNiceOrBad}}
 </template>
 
 <script>
@@ -32,7 +46,7 @@ import MyInputVue from './components/MyInput.vue'
 
 import Axios from 'axios'
 import DModalVue from './components/D-Modal.vue'
-import { ref, reactive } from 'vue';
+import { ref, reactive, toRefs, computed, readonly } from 'vue';
 export default {
   name: 'App',
   components: {
@@ -48,6 +62,15 @@ export default {
       name: '邓宇',
       age: 31
     });
+    var article = reactive({
+      name: '钢铁是怎样炼成的',
+      sells: 1000000
+    })
+
+    // 将响应式对象修改为深度只读对象
+    article = readonly(article)
+    // 将响应式数据修改为深度只读数据
+    // title = readonly(title)
     // 获取和修改值
     function getTitle() {
       console.log(title.value);
@@ -58,12 +81,22 @@ export default {
       userInfo.name = '改变后的值'
     }
 
+    // 设置计算属性
+    let sellsNiceOrBad = computed(() => {
+      if (article.sells >= 1000000) {
+        return '销量好'
+      } else {
+        return '销量一般'
+      }
+    })
     // 将定义的值返回
     return {
       title,
       userInfo,
       getTitle,
-      setTitle
+      setTitle,
+      ...toRefs(article),  // 解构响应式对象
+      sellsNiceOrBad
     }
   },
   data() {
