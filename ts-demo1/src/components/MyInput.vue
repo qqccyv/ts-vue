@@ -12,15 +12,28 @@
       {{name}}
       <button @click="showName">展示name</button>
     </div>
+    <div>
+      value2 {{value2}}
+    </div>
   </div>
 </template>
 
 <script>
+import { ref } from 'vue'
 export default {
   props: {
     value: {
       type: String,
       default: ''
+    }
+  },
+  setup(props) {
+
+
+    let value2 = ref(props.value).value + '123'
+
+    return {
+      value2
     }
   },
   methods: {
