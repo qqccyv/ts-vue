@@ -38,6 +38,9 @@
 
   <br>
   销量::{{sellsNiceOrBad}}
+
+  <br>
+  年龄：{{userInfo.age}}
 </template>
 
 <script>
@@ -46,7 +49,7 @@ import MyInputVue from './components/MyInput.vue'
 
 import Axios from 'axios'
 import DModalVue from './components/D-Modal.vue'
-import { ref, reactive, toRefs, computed, readonly } from 'vue';
+import { ref, reactive, toRefs, computed, readonly, watchEffect, watch } from 'vue';
 export default {
   name: 'App',
   components: {
@@ -89,12 +92,37 @@ export default {
         return '销量一般'
       }
     })
+    var data1 = reactive({
+      num: 1
+    })
+
+    const data2 = reactive({
+      num: 1
+    })
+
+    // var num3 = ref(1)
+    // 可以监听具体某一个值的变化,并且在初始化时会先执行一次
+    watchEffect(() => {
+      // console.log(userInfo.age);
+      // console.log(data1.num);
+    })
+    // 监听一个响应式对象或者值，懒加载，只有变化后才第一次调用，监听的值是对象时，新老值因为引用相同而输出相同，因为vue没有保存引用的副本
+    watch(data2, (newValue, oldValue) => {
+      console.log('新值', newValue, '老值', oldValue);
+    })
+    setInterval(() => {
+      // userInfo.age++
+      // data1.num++
+      data2.num++
+      // num3.value++
+    }, 1000)
     // 将定义的值返回
     return {
       title,
       userInfo,
       getTitle,
       setTitle,
+      ...toRefs(data1),
       ...toRefs(article),  // 解构响应式对象
       sellsNiceOrBad
     }
