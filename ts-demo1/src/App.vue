@@ -41,6 +41,10 @@
 
   <br>
   年龄：{{userInfo.age}}
+
+  <hr>
+  <input type="text"
+         v-model="num">
 </template>
 
 <script>
@@ -49,7 +53,7 @@ import MyInputVue from './components/MyInput.vue'
 
 import Axios from 'axios'
 import DModalVue from './components/D-Modal.vue'
-import { ref, reactive, toRefs, computed, readonly, watchEffect, watch } from 'vue';
+import { ref, reactive, toRefs, computed, readonly, watchEffect, watch, provide } from 'vue';
 export default {
   name: 'App',
   components: {
@@ -93,7 +97,7 @@ export default {
       }
     })
     var data1 = reactive({
-      num: 1
+      num: '我是app的值'
     })
 
     const data2 = reactive({
@@ -110,12 +114,18 @@ export default {
     watch(data2, (newValue, oldValue) => {
       console.log('新值', newValue, '老值', oldValue);
     })
-    setInterval(() => {
-      // userInfo.age++
-      // data1.num++
-      data2.num++
-      // num3.value++
-    }, 1000)
+    // setInterval(() => {
+    //   userInfo.age++
+    //   data1.num++
+    //   data2.num++
+    //   num3.value++
+    // }, 1000)
+    watchEffect(() => {
+      console.log(data1.num);
+    })
+    // 组合式api中使用provide向子孙辈组件传值时，是响应式的
+    provide('provide-data', data1)
+
     // 将定义的值返回
     return {
       title,

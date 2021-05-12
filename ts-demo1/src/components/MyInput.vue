@@ -15,11 +15,16 @@
     <div>
       value2 {{value2}}
     </div>
+
+    <hr>
+    哈哈哈 <input type="text"
+           v-model="num.num">
+    inject: {{num.num}}
   </div>
 </template>
 
 <script>
-import { ref } from 'vue'
+import { ref, inject, watchEffect } from 'vue'
 export default {
   props: {
     value: {
@@ -31,9 +36,15 @@ export default {
 
 
     let value2 = ref(props.value).value + '123'
-
+    // 子孙辈组件用inject接收父辈组件传的值，会互相影响
+    let num = inject('provide-data')
+    console.log(num);
+    watchEffect(() => {
+      console.log(num);
+    })
     return {
-      value2
+      value2,
+      num
     }
   },
   methods: {
