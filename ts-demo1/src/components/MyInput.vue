@@ -32,6 +32,9 @@ export default {
       default: ''
     }
   },
+  emits: {
+
+  },
   setup(props) {
 
 
@@ -48,7 +51,9 @@ export default {
     }
   },
   methods: {
-
+    input() {
+      // this.$emit('slkdjf',sldkjflksjd)
+    }
   },
 }
 </script>
