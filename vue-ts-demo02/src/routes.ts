@@ -5,7 +5,7 @@ const routes = createRouter({
   history: createWebHashHistory(),
   routes: [
     { path: '/', component: HelloWord },
-    { path: '/helloEveryone', component: HelloEveryone }
+    { path: '/helloEveryone/:someword', component: HelloEveryone }
   ]
 })
 

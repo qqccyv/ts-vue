@@ -2,7 +2,12 @@
   <!-- <img alt="Vue logo" src="./assets/logo.png">
   <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/> -->
   <router-link to="/">HelloWorld</router-link>
-  <router-link to="./helloEveryone">helloEveryone</router-link>
+  <br>
+  <!-- 动态路由传参,this.$route.params接收传参 -->
+  <!-- <router-link to="/helloEveryone/hello">helloEveryone</router-link> -->
+  <br>
+  <!-- get传参 this.$route.query接收传参-->
+  <!-- <router-link to="/helloEveryone?hello=你好">helloEveryone</router-link> -->
   <router-view></router-view>
 </template>
 

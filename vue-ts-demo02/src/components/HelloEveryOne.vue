@@ -11,7 +11,11 @@ export default defineComponent({
     return {
       title: 'hello everyone'
     }
-  }
+  },
+  mounted() {
+    console.log('query', this.$route.query)
+    console.log('params', this.$route.params)
+  },
 })
 </script>
 
