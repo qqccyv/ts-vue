@@ -5,7 +5,8 @@ const routes = createRouter({
   history: createWebHashHistory(),
   routes: [
     { path: '/', component: HelloWord },
-    { path: '/helloEveryone/:someword', component: HelloEveryone }
+    // { path: '/helloEveryone/:someword', component: HelloEveryone },  // 配置的动态路由一定要和routerlink搭配使用
+    { name: 'helloEveryone', path: '/helloEveryone', component: HelloEveryone },
   ]
 })
 
