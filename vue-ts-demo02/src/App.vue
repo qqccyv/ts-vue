@@ -8,8 +8,12 @@
   <br>
   <!-- get传参 this.$route.query接收传参-->
   <!-- <router-link to="/helloEveryone?hello=你好">helloEveryone</router-link> -->
-  <h1>{{$store.state.count}}</h1>
-  <button @click="incCount">改变vuex中的值</button>
+  <h1>{{$store.state.count}}---1</h1>
+  <h2>{{count}}---2</h2>
+  <h2>{{countGetter}}---3</h2> <!-- getters可以不用模块名字直接拿 -->
+  <h2>{{$store.state.modulesA.count}}---4</h2> <!-- state中的数据需要添加模块名字才能拿到 -->
+  <button @click="incCount">改变vuex中的值 +</button>
+  <button @click="incCountSub">改变vuex中的值 -</button>
   <!-- js路由跳转 -->
   <button @click="goHello">跳转到helloevery</button>
 
@@ -19,6 +23,7 @@
 
 <script >
 import { defineComponent } from "vue";
+import { mapGetters, mapState } from "vuex";
 // import HelloWorld from "./components/HelloWorld.vue";
 
 export default defineComponent({
@@ -28,7 +33,8 @@ export default defineComponent({
     // console.log(this.$store.state.count);
   },
   computed: {
-
+    ...mapState(['count']),
+    ...mapGetters(['countGetter'])
   },
   methods: {
     goHello() {
@@ -55,7 +61,12 @@ export default defineComponent({
       // });
     },
     incCount() {
+      // 直接改变vuex中的state里的值
       this.$store.commit('increment')
+    },
+    incCountSub() {
+      // 异步改变vuex中的state里的值
+      this.$store.dispatch('subCount', -1)
     }
   },
 });

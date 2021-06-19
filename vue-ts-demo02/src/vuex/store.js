@@ -1,14 +1,8 @@
-import { createStore } from 'vuex'
+import { createStore } from 'vuex';
+import modulesA from './modulesA';
 const store = createStore({
-  state() {
-    return {
-      count: 1
-    }
-  },
-  mutations: {
-    increment(state) {
-      state.count++
-    }
+  modules: {
+    modulesA
   }
 })
 
